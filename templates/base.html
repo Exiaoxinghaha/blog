@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    {% load static %}
+<title>E·小星个人博客</title>
+<meta name="keywords" content="E·小星个人博客" />
+<meta name="description" content="E·小星个人博客" />
+<link href="{% static 'css/base.css' %}" rel="stylesheet">
+<link href="{% static 'css/index.css' %}" rel="stylesheet">
+<link href="{% static 'css/learn.css' %}" rel="stylesheet">
+<link href="{% static 'css/mycss.css' %}" rel="stylesheet">
+<!--[if lt IE 9]>
+<script src="{% static 'js/modernizr.js' %}"></script>
+<![endif]-->
+<script src="{% static 'js/scrollReveal.js' %}"></script>
+</head>
+<body>
+<header>
+  <div class="logo" data-scroll-reveal="enter right over 1s"><a href="/"><img src="{% static 'images/logo.png' %}"></a></div>
+  <nav class="topnav" data-scroll-reveal="enter bottom over 1s after 1s">
+      <a href="{% url 'index' %}"><span>首页</span><span class="en">Home</span></a>
+      {% for category in categorys %}
+      <a href="{% url 'article:basics' category.id %}"><span>{{ category.get_name_display}}</span><span class="en">{{ category.get_name_display }}</span></a>
+      {% endfor %}
+{#      <a href="{% url 'article:databases' %}"><span>数据库</span><span class="en">Database</span></a>#}
+{#      <a href="{% url 'article:django' %}"><span>Django</span><span class="en">Django</span></a>#}
+{#      <a href="{% url 'article:doing' %}"><span>碎言碎语</span><span class="en">Doing</span></a>#}
+{#      <a href="{% url 'article:share' %}"><span>源码分享</span><span class="en">Share</span></a>#}
+{#      <a href="{% url 'article:learn' %}"><span>学无止境</span><span class="en">Learn</span></a>#}
+  </nav>
+</header>
+{% block article %}
+{% endblock article %}
+<footer>
+Design by DanceSmile <a href="/">蜀ICP备11002373号-1</a>
+</footer>
+<script>
+	if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))){
+		(function(){
+			window.scrollReveal = new scrollReveal({reset: true});
+		})();
+	};
+</script>
+</body>
+</html>

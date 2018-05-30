@@ -1,0 +1,4 @@
+#art_title{ position:relative}
+#art_title b{font-size: 22px; margin-bottom: 20px; background: #2a7497; padding: 10px 0; width: 400px; text-align: center; border-radius: 30px 30px 30px 30px; box-shadow: #21566f 1px 1px 1px;  display:block; margin:30px auto;}
+#art_content{ position:relative}
+#art_content{margin: 50px 30px 30px 30px;}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block article %}
+<article>
+  <div class="container">
+    <div class="blog" data-scroll-reveal="enter top" >
+      <figure>
+        <ul>
+          <a href="/"><img style="width: 270px;height: 256px" src="{% static 'images/article/thread.jpg' %}"><span>阅读全文</span></a>
+        </ul>
+        <p><a href="/">并发编程</a></p>
+        <figcaption>所谓并发编程是指在一台处理器上“同时”处理多个任务。并发是在同一实体上的多个事件。多个事件在同一时间间隔发生...</figcaption>
+      </figure>
+      <figure>
+        <ul>
+          <a href="/"><img style="width: 270px;height: 256px" src="{% static 'images/article/python.jpg' %}"><span>阅读全文</span></a>
+        </ul>
+        <p><a href="/">python之美</a></p>
+        <figcaption>Python是一种代表简单主义思想的语言。阅读一个良好的Python程序就感觉像是在读英语一样。它使你能够专注于解决问题而不是去搞明白语言本身...</figcaption>
+      </figure>
+      <figure>
+        <ul>
+          <a href="/"><img style="width: 270px;height: 256px"  src="{% static 'images/article/databases.jpg' %}"><span>阅读全文</span></a>
+        </ul>
+        <p><a href="/">MySQL</a></p>
+        <figcaption>MySQL是一个关系型数据库管理系统，由瑞典MySQL AB 公司开发，目前属于 Oracle 旗下产品。MySQL 是最流行的关系型数据库管理系统之一...</figcaption>
+      </figure>
+    </div>
+   <ul class="cbp_tmtimeline">
+       {% for article in article_list %}
+					<li>
+						<time class="cbp_tmtime"><span>{{ article.create_time|date:'m-d'}}</span> <span>{{ article.create_time|date:'Y'}}</span></time>
+						<div class="cbp_tmicon"></div>
+						<div class="cbp_tmlabel" data-scroll-reveal="enter right over 1s" >
+							<h2>{{ article.title }}</h2>
+							 <p><span class="blogpic"><a href="/"><img style="width: 200px;height: 120px"  src="{{ MEDIA_URL }}{{ article.image }}"></a></span>{{article.description}}</p>
+                             <a href="{% url 'article:detail' article.id %}" target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+						</div>
+					</li>
+       {% endfor %}
+				</ul>
+  </div>
+</article>
+{% endblock article %}
