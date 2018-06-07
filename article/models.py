@@ -2,7 +2,7 @@ from django.db import models
 from tinymce.models import HTMLField
 
 class Category(models.Model):
-    CATEGORY = (
+    CATEGORY =(
         (1,'Python基础'),
         (2,'数据库'),
         (3,'Django'),
@@ -15,8 +15,21 @@ class Category(models.Model):
     class Meta:
         verbose_name = '文章分类'
         verbose_name_plural = verbose_name
+
     def __str__(self):
         return self.get_name_display()
+
+
+class TagsModel(models.Model):
+    name = models.CharField(max_length=10,default=None,null=True,verbose_name='类别标签')
+    category = models.ForeignKey(Category,default=None,null=True,verbose_name='文章分类')
+
+    class Meta:
+        verbose_name = '类别标签'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
 
 
 class ArticleModel(models.Model):
@@ -28,9 +41,11 @@ class ArticleModel(models.Model):
     modify_time = models.DateField(auto_now=True,verbose_name='修改时间')
     click_count = models.IntegerField(default=0,verbose_name='点击量')
     category = models.ForeignKey(Category,verbose_name='文章类别')
+    tags = models.ForeignKey(TagsModel,default=None,null=True,verbose_name='文章标签')
 
     class Meta:
         verbose_name = '我的文章'
         verbose_name_plural = verbose_name
+
     def __str__(self):
         return self.title

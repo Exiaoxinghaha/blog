@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from .models import ArticleModel,Category
+from .models import ArticleModel,Category,TagsModel
 
 class IndexView(View):
     def get(self,request):
@@ -9,9 +9,14 @@ class IndexView(View):
 
 class BasicsView(View):
     def get(self,request,cid):
-        article_list = ArticleModel.objects.filter(category_id=cid).all()
+        tid = request.GET.get('tid')
+        article_list = ArticleModel.objects.filter(category_id=cid).order_by('-create_time').all()
+        if tid:
+            article_list = ArticleModel.objects.filter(category_id=cid,tags_id=tid).order_by('-create_time').all()
         category = Category.objects.filter(pk=cid).first()
+        tags = TagsModel.objects.filter(category=category).all()
         return render(request,'basics.html',locals())
+
 
 class ArticleDetailView(View):
     def get(self,request,aid):
